@@ -32,6 +32,12 @@ export interface Runner {
   position: number
   /** How the horse feels in this particular round (multiplier around 1). */
   form: number
+  /** Current pace (multiplier around 1). Drifts towards `paceTarget` over a few seconds. */
+  pace: number
+  /** The pace the horse is currently speeding up or slowing down to. */
+  paceTarget: number
+  /** Seconds left before the horse picks a new `paceTarget`. */
+  paceTimeLeft: number
   /** Seconds from the start of the round to crossing the line; null while still running. */
   finishTime: number | null
 }
