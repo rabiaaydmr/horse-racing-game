@@ -16,8 +16,15 @@ export const RACE_ENGINE = {
   minConditionFactor: 0.75,
   /** Per-round luck: form is picked once per round within ±this share. */
   formVariance: 0.08,
-  /** Per-frame pace change within ±this share; makes horses overtake each other. */
-  paceJitter: 0.3,
+  /**
+   * Pace changes during the race, so a horse can fade or come from behind.
+   * Every few seconds each horse picks a new target pace within ±this share…
+   */
+  paceSwing: 0.15,
+  /** …keeps it for this many seconds (picked at random in between)… */
+  paceHoldSeconds: { min: 1, max: 3 },
+  /** …and closes this share of the gap to the target per second (smooth, not instant). */
+  paceResponse: 1.5,
   /** Pause between two rounds so the result can be read. */
   roundBreakSeconds: 1.5,
   /** Longest time step accepted from one frame (e.g. after the tab was in the background). */
