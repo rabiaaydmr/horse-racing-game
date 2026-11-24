@@ -102,14 +102,24 @@ horses store, never the other way round.
 Per frame, each horse still running moves `speed × dt` metres, where
 
 ```
-speed = baseSpeed × conditionFactor × form × jitter
+speed = baseSpeed × conditionFactor × form × pace
 ```
 
 - `conditionFactor` scales from 0.75 (condition 1) to 1.0 (condition 100)
 - `form` is drawn once per horse per round (±8 %): a good or a bad day
-- `jitter` changes every frame (±30 %), which produces overtaking
+- `pace` changes during the race: every 1–3 s the horse picks a new target pace (±15 %) and
+  drifts towards it smoothly, so it can fade, recover or come from behind
 
-So a fitter horse wins more often, but not always. When a horse crosses the line inside a
+So a fitter horse wins more often, but not always: in 400 simulated 10-horse rounds the leader
+at a quarter of the race wins about 63 % of the time, and about 6 % of winners were outside the
+top three at that point (a test keeps it that way).
+
+The first version added random noise to the speed on every frame instead. Measured over 2,000
+rounds, the early leader then won 85 % of the time and comebacks from outside the top three
+almost never happened (0.3 %): noise redrawn 60 times a second averages out, so each horse's
+speed was effectively constant. Slowly changing pace fixes that.
+
+When a horse crosses the line inside a
 frame, its exact finishing time is interpolated, so the ranking does not depend on frame rate.
 All tuning values are in `constants/race.ts`.
 
