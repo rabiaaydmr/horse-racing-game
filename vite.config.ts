@@ -10,6 +10,8 @@ const isE2E = !!process.env.E2E
 
 // https://vite.dev/config/
 export default defineConfig({
+  // GitHub Pages serves the site from /<repo>/; the deploy workflow sets BASE_PATH.
+  base: process.env.BASE_PATH ?? '/',
   plugins: [vue(), !isE2E && vueDevTools()],
   resolve: {
     alias: {
