@@ -1,6 +1,13 @@
 # Horse Racing
 
+[![CI](https://github.com/rabiaaydmr/horse-racing-game/actions/workflows/ci.yml/badge.svg)](https://github.com/rabiaaydmr/horse-racing-game/actions/workflows/ci.yml)
+
 An interactive horse racing game built with **Vue 3**, **Pinia** and **TypeScript**.
+
+**Live demo:** https://rabiaaydmr.github.io/horse-racing-game/
+(add `?speed=10` to the address to watch a whole program in a few seconds)
+
+![All six rounds finished](docs/screenshot.png)
 
 - 20 horses, each with a unique colour and a condition score between 1 and 100
 - **Generate Program** draws 6 rounds (1200 m → 2200 m), 10 random horses per round
@@ -114,6 +121,11 @@ All tuning values are in `constants/race.ts`.
 - **Visual** (`e2e/visual.spec.ts`): screenshot comparison of three states with a seeded
   `Math.random`. Reference images are per platform; regenerate with
   `npx playwright test visual --update-snapshots`.
+
+Every push runs lint, unit tests, the production build and the E2E tests on GitHub Actions
+(`.github/workflows/ci.yml`); when they pass on `main`, the game is deployed to GitHub Pages.
+The visual tests run locally only, because their reference screenshots are recorded on macOS
+and fonts render slightly differently on the Linux runners.
 
 ## Assumptions
 
